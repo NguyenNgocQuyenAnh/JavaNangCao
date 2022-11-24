@@ -12,11 +12,11 @@ public class giohangbo {
 	  public void Them(String masach, String tensach, long gia, long soluong) {
 		  for(giohangbean h: ds)
 			  if(h.getMasach().equals(masach)) {
+				 // h.setSoluong(h.getSoluong()+ soluong);
 				  h.setSoluong(h.getSoluong()+ soluong);
 				  return;
 			  }
-		  
-		  ds.add(new giohangbean(masach, tensach, gia, soluong));
+		   ds.add(new giohangbean(masach, tensach, gia, soluong));
 	  }
 	  public long Tongtien() {
 		  long s=0;
@@ -24,11 +24,11 @@ public class giohangbo {
 			  s=s+h.getThanhtien();
 		  return s;
 	  }
-		 public void sua(String ms , long soluong) {
+		 public void sua(String ms , long sl) {
 			 for(giohangbean g : ds) {
 				 if(g.getMasach().equals(ms))
 				 {
-			          g.setSoluong(soluong);
+			          g.setSoluong(sl);;
 			          return;
 				 }
 			 }
@@ -44,4 +44,12 @@ public class giohangbo {
 	 public void xoaAll() {
          ds.removeAll(ds);
 	 }
+	 public int countBook() {
+			int count = 0;
+			for (giohangbean g: ds) {
+				count++;
+			}
+			
+			return count;
+		}
 }

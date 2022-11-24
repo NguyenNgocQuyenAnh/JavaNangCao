@@ -104,13 +104,14 @@
            </td>
            <td>  <%=s.getThanhtien() %>
           </td>
-          
+         
       <%}   }%>
        </table>
      <table>
           <tr>
            <td> <h2 style="font-size: 25; font-weight: bold; color: Blue">Tổng Tiền:</h2></td>
            <td> <h2><%=gh.Tongtien() %></h2></td>
+           
           </tr>
      </table>
       <button name="butcheck" value="haha" class="btn-link" type="submit">
@@ -119,6 +120,7 @@
         <button name="butxoaAll" value="haha" class="btn-link" type="submit">
            		Delete All
       </button>
+      <a href="thanhtoan">Thanh Toán</a>
   </form>
        </td>
       <td width="200" valign="top">

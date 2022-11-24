@@ -45,6 +45,7 @@ public class suaxoa extends HttpServlet {
 				gh.xoa(ms);
 			}
 			else{
+				//gh.sua(ms, sl);
 				gh.sua(ms, sl);
 			}
 		}else

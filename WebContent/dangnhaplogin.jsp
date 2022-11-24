@@ -14,21 +14,22 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+ 
 </head>
 <body>
     <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     
     <ul class="nav navbar-nav">
-      <li class="active"><a href="#">trang chu</a></li>
+      <li class="active"><a href="htsach">trang chu</a></li>
       
       <li><a href="#">gio hang</a></li>
        <li><a href="#">thanh toan</a></li>
         <li><a href="#">lich su mua hang</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-      <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-      <li><a href="dangnhaplogin.jsp"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      <li><a href="ktdn"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      <li><a href="ktdn"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
     </ul>
   </div>
 </nav>
@@ -43,7 +44,7 @@
       %>
           <tr>
            <td>
-            <a href="htsach.jsp?ml=<%=l.getMaloai()%>"> 
+            <a href="htsach?ml=<%=l.getMaloai()%>"> 
               <%=l.getTenloai() %>
              </a>
           </td>
@@ -52,28 +53,40 @@
        </table>
         </td>
       <td width="600" valign="top"> 
-         <table>
-      <form action="ktdn" method="post">
+         <table> 
+       <form action="ktdn" method="post" id="form">
           un: <input name="txtun" type="text"><br>
           pass:<input name="txtpass" type="password"><br>
-          <input name="but1" type="submit" value="login">
-          <%if(request.getParameter("kt")!=null){
-        	 out.print("dang nhap sai");
-          }%>
+          <div class="g-recaptcha" data-sitekey="6LdFKBMjAAAAADCYVmxuxZooLabzQ9tYmiGjONxi"></div>
+          <div id="error"></div>
+          <input name="but1" type="submit" value="Đăng nhập"><br>
+          Bạn chưa có tài khoản ?<a href="dangky.jsp">Đăng Ký</a>
        </form>
-       </table>
+          <script src="https://www.google.com/recaptcha/api.js" async defer></script>
         
-       </td>
-      <td width="200" valign="top"> 
-        <form action="htsach.jsp" method="post">
- 		 <input  name="txttk" type="text" value="" placeholder="Nhap tt"> <br>
-  		 <input name="butt" type="submit" value="Search">
-		</form>
-     </td>
+             <script>
+			    window.onload = function (){
+				let isValid = false;
+				const form = document.getElementById("form");
+				const error = document.getElementById("error");
+				
+				form.addEventListener("submit", function (event){
+					event.preventDefault();
+					const response = grecaptcha.getResponse();
+					if (response){
+						form.submit();
+					} else {
+						error.innerHTML = "Please check";
+					}
+				});
+			}
+		</script>
+		 <%String tb = (String)request.getAttribute("error");
+           if(tb!= null){ %>
+               <h5 style="color: red">thông tin nhập không hợp lệ</h5>   
+         <% }%> 
    </tr>
-  
 </table>
 </body>
 
-</body>
 </html>

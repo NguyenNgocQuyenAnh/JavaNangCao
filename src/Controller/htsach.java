@@ -41,21 +41,26 @@ public class htsach extends HttpServlet {
         request.setAttribute("dsloai", dsloai); // chuyen sang cho htsach.jsp
         
         sachbo sbo = new sachbo();
-         ArrayList<sachbean> dssach = sbo.getsach(); // lay sach ve
-          String ml=request.getParameter("ml");
-          String key=request.getParameter("txttk");
-          if(ml!=null)
+        ArrayList<sachbean> dssach = sbo.getsach(); // lay sach ve
+        String ml=request.getParameter("ml");
+        String key=request.getParameter("txttk");
+        if(ml!=null)
           	dssach=sbo.TimMa(ml);
-          else
+        else
           	if(key!=null)
           		dssach=sbo.Tim(key);
+          
+        int trang;
+  		if(request.getParameter("trang") == null) {
+  			trang = 1;
+  		}else trang = Integer.parseInt(request.getParameter("trang"));
+  		
+  		request.setAttribute("trang", trang);
+  		  
         request.setAttribute("dssach", dssach); //gui ve cho htsach.jsp
         RequestDispatcher rd= request.getRequestDispatcher("htsach.jsp");
         rd.forward(request, response);
 	}
-	 
- 	
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

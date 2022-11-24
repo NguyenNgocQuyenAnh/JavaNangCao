@@ -2,6 +2,9 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.util.ArrayList;
+
+import bean.lichsumuahangbean;
 
 public class KetNoi {
 	public Connection cn;
@@ -20,5 +23,6 @@ public class KetNoi {
 	public static void main(String[] args) {
 		KetNoi kn = new KetNoi();
 		kn.KetNoi();
+	
 	}
 }

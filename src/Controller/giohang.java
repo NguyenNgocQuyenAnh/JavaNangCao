@@ -35,9 +35,9 @@ public class giohang extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String masach =request.getParameter("ms");
-			String tensach =request.getParameter("ts");
+		String tensach =request.getParameter("ts");
 		long gia=Long.parseLong(request.getParameter("gia"));
-			giohangbo gh=null;
+		giohangbo gh=null;
 			//Neu mua lan dau thi tao cho kh 1 gio: session
 			HttpSession session = request.getSession();
 			if(session.getAttribute("gio")==null){

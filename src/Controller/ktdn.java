@@ -1,6 +1,7 @@
 package Controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,6 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import bean.khachhangbean;
+import bo.khachhangbo;
 
 /**
  * Servlet implementation class ktdn
@@ -30,26 +34,31 @@ public class ktdn extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		 String un = request.getParameter("txtun");
-	        String pass = request.getParameter("txtpass");
-	       if(un!=null && pass!=null) {
-	    	   if(un.equals("abc") && pass.equals("123"))
-		        {  HttpSession session = request.getSession();
-		        	session.setAttribute("dn", un);
-//		        	RequestDispatcher rd = request.getRequestDispatcher("htsach.jsp");
-//		        	rd.forward(request, response);
-		        	response.sendRedirect("htsach");
-		        }
-	    	   else {// dang nhap sai
-	    		   RequestDispatcher rd = request.getRequestDispatcher("dangnhaplogin.jsp?kt=1");
-	    		   rd.forward(request, response);
-	    	   }
-	       }
-	       else { // chay lan dau
-	    	   RequestDispatcher rd = request.getRequestDispatcher("dangnhaplogin.jsp");
-	        	rd.forward(request, response);
-	        	
-	       }
-	       
+	     String pass = request.getParameter("txtpass");
+	     String but = request.getParameter("but1");
+	      if(un!=null && pass!=null) 
+	      {
+		    	 HttpSession session = request.getSession();
+		    	 khachhangbo khbo= new khachhangbo();
+		    	 ArrayList<khachhangbean> dskhg = khbo.getkh();
+		    	 khachhangbean kh = new khachhangbean();
+//		    	 Neu chua tao session
+		    	 kh = khbo.ktdn(un, pass);
+		    	if(kh != null)
+		    	 { session.setAttribute("kh", kh);
+		           RequestDispatcher rd = request.getRequestDispatcher("htsach");
+		    	   rd.forward(request, response);
+		    	 }
+		    	else {
+					request.setAttribute("error", "error");
+					RequestDispatcher rd = request.getRequestDispatcher("dangnhaplogin.jsp");
+					rd.forward(request, response);
+				}
+	      }
+		    else { // chay lan dau
+		    	RequestDispatcher rd = request.getRequestDispatcher("dangnhaplogin.jsp");
+		        rd.forward(request, response);
+		    }   
 	}
 
 	/**
